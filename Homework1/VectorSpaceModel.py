@@ -27,13 +27,30 @@ class VectorSpaceModel(object):
         for k in self.rawTF:
             self.vector[k] = self.calTF(k, self, tf_method)*self._IDF[k]
 
-    def toUnit(self):
+    def normalize(self):
         if not self.vector:
             self.calWeight(TF_Scale.SUB_LINEAR)
-        length = math.sqrt(sum(weight**2 for weight in self.vector.values()))
+        norm = math.sqrt(sum(weight**2 for weight in self.vector.values()))
         for k in self.vector:
-            self.vector[k] /= length
+            self.vector[k] /= norm
+        self._isUnit = True
         return self
+
+    def dot(self, other):
+        return VectorSpaceModel.dotProduct(self, other)
+
+    def getTerms(self):
+        return self.rawTF.keys()
+
+    @staticmethod
+    def dotProduct(a, b):
+        if not(a._isUnit and b._isUnit):
+            raise "Please use toUnit() to normalize all vectors."
+        result = 0
+        for k in a.vector.keys():
+            if k in b.vector:
+                result += a.vector[k]*b.vector[k]
+        return result
 
     @staticmethod
     def calTF(t, vsm, tf_method):
@@ -43,6 +60,10 @@ class VectorSpaceModel(object):
             return vsm.alpha + (1 - vsm.alpha)*vsm.rawTF[t]/vsm._maxCountInTF
         else: #TF_Scale.RAW
             return vsm.rawTF[t]
+
+    @classmethod
+    def getCorpus(cls):
+        return cls.rawDF.keys()
 
     @classmethod
     def accumulateDocumentFrequency(cls, words):
