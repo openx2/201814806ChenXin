@@ -13,3 +13,6 @@ __pycache__/
 # IPython
 profile_default/
 ipython_config.py
+
+# office files
+*.doc?

@@ -25,7 +25,8 @@ class VectorSpaceModel(object):
             calIDF()
         self.vector = {}
         for k in self.rawTF:
-            self.vector[k] = self.calTF(k, self, tf_method)*self._IDF[k]
+            if k in self._IDF:
+                self.vector[k] = self.calTF(k, self, tf_method)*self._IDF[k]
 
     def normalize(self):
         if not self.vector:
@@ -33,7 +34,7 @@ class VectorSpaceModel(object):
         norm = math.sqrt(sum(weight**2 for weight in self.vector.values()))
         for k in self.vector:
             self.vector[k] /= norm
-        self._isUnit = True
+        self._isNormalized = True
         return self
 
     def dot(self, other):
@@ -44,8 +45,8 @@ class VectorSpaceModel(object):
 
     @staticmethod
     def dotProduct(a, b):
-        if not(a._isUnit and b._isUnit):
-            raise "Please use toUnit() to normalize all vectors."
+        if not(a._isNormalized and b._isNormalized):
+            raise "Please use normalize() for all vectors."
         result = 0
         for k in a.vector.keys():
             if k in b.vector:
