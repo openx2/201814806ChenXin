@@ -3,10 +3,9 @@ from collections import Counter
 from collections import defaultdict
 
 class KNNClassifier(object):
-    def __init__(self, vsms, labels, k):
+    def __init__(self, vsms, labels):
         self.vsms = vsms
         self.labels = labels
-        self.k = k
 
     def buildInvertedList(self):
         self.invertedList = defaultdict(list)
@@ -17,7 +16,7 @@ class KNNClassifier(object):
     def train(self):
         self.buildInvertedList()
 
-    def classify(self, vsm):
+    def classify(self, vsm, k):
         priority_queue = []
         index_set = set() # avoid duplicate indices
         for t in vsm.getTerms():
@@ -26,6 +25,8 @@ class KNNClassifier(object):
                     cos_similarity = vsm.dot(self.vsms[index])
                     heapq.heappush(priority_queue, (cos_similarity, index))
                     index_set.add(index)
-        k_nearest_neighbor = [heapq.heappop(priority_queue) for i in range(self.k)]
+        k_nearest_neighbor = [heapq.heappop(priority_queue) for i in range(k)]
         label_counter = Counter(self.labels[i] for dis, i in k_nearest_neighbor)
-        return label_counter.most_common(1)[0]
+        #debug
+        #return k_nearest_neighbor
+        return label_counter.most_common(1)[0][0]
