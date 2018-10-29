@@ -23,7 +23,7 @@ class KNNClassifier(object):
             for index in self.invertedList[t]:
                 if index not in index_set:
                     cos_similarity = vsm.dot(self.vsms[index])
-                    heapq.heappush(priority_queue, (cos_similarity, index))
+                    heapq.heappush(priority_queue, (-cos_similarity, index))
                     index_set.add(index)
         k_nearest_neighbor = [heapq.heappop(priority_queue) for i in range(k)]
         label_counter = Counter(self.labels[i] for dis, i in k_nearest_neighbor)
