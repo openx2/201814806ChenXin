@@ -22,7 +22,7 @@ class VectorSpaceModel(object):
 
     def calWeight(self, tf_method):
         if not self._IDF:
-            calIDF()
+            self.calIDF()
         self.vector = {}
         for k in self.rawTF:
             if k in self._IDF:
