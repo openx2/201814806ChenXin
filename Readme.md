@@ -10,4 +10,4 @@ then do such tasks:
 
 Homework 1 was completed on November 1.
 
-I submitted a lab report with more details.
+I submitted [a lab report](https://github.com/openx2/201814806ChenXin/blob/master/Homework1/lab%20report.pdf) with more details.
