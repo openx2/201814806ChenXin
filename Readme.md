@@ -15,3 +15,8 @@ I submitted [a lab report](https://github.com/openx2/201814806ChenXin/blob/maste
 ## Homework 2:
 Use the 20 Newsgroups dataset and do the task:
 * Implement the Naive Bayes Classifier, and test its performance in the 20 Newsgroups dataset.
+
+Homework 2 was completed on November 11.
+
+I submitted [a lab report](https://github.com/openx2/201814806ChenXin/blob/master/Homework2/lab%20report.pdf) with more details.
+
