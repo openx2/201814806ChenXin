@@ -24,18 +24,19 @@ class NaiveBayesClassifier(object):
                 self.label_word_probability[lb][w] = math.log(prob) # take the logarithm
 
         self.label_class_prob = {lb: math.log(num/len(self.labels)) for lb, num in Counter(self.labels).items()} # take the logarithm
+        # import pdb; pdb.set_trace()
 
     def classify(self, test_data):
-        word_set = set(t for t in test_data)
+        word_set = Counter(test_data)
         max_prob = -math.inf
         result_label = None
         for lb in self.label_word_probability:
             sum_prob = self.label_class_prob[lb] # log(P(vj))
-            for w in word_set: # log(P(x1,x2, ... | vj)) = log(P(x1 | vj)) + log(P(x2 | vj)) + ...
+            for w, times in word_set.items(): # log(P(x1,x2, ... | vj)) = log(P(x1 | vj)) + log(P(x2 | vj)) + ...
                 if w in self.label_word_probability[lb]:
-                    sum_prob += self.label_word_probability[lb][w]
+                    sum_prob += self.label_word_probability[lb][w] * times
                 else:
-                    sum_prob += self.label_missing_word_prob[lb]
+                    sum_prob += self.label_missing_word_prob[lb] * times
             if sum_prob > max_prob:
                 max_prob = sum_prob
                 result_label = lb
