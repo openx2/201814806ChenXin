@@ -20,3 +20,13 @@ Homework 2 was completed on November 11.
 
 I submitted [a lab report](https://github.com/openx2/201814806ChenXin/blob/master/Homework2/lab%20report.pdf) with more details.
 
+## Homework 3:
+Use Tweets dataset to test performance of [those clustering methods mentioned by sklearn](https://scikit-learn.org/stable/modules/clustering.html#overview-of-clustering-methods),
+apply [NMI(Normalized Mutual Information)](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html) to their results.
+
+Homework 3 was completed on December 21.
+
+I submitted [a lab report](https://github.com/openx2/201814806ChenXin/blob/master/Homework3/lab%20report.pdf) with more details.
+
+## Total experiment report
+I submitted [a concatenated experiment report](https://github.com/openx2/201814806ChenXin/blob/master/concatenated%20experiment%20report.pdf) as the final homework.
